@@ -97,7 +97,8 @@ function Join-Domain
 
         $x = Get-WindowsCapability -Name RSAT* -Online
 
-        Write-Host $x
+        Write-Host $x[0].Name
+        Write-Host $x[0].State
     }
 }
 
