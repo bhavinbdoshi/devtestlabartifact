@@ -31,9 +31,16 @@
       "allowEmpty": true,
       "defaultValue": ""
     }
+	"adGroup": {
+      "type": "string",
+      "displayName": "Active Directory Group",
+      "description": "Optional. Only required if you have configured organizational units in your domain; leave blank otherwise. For example, OU=Workstations,OU=Machines,DC=corp,DC=contoso,DC=com. Where 'Workstations' and 'Machines' are 2 organizational units configured in your domain.",
+      "allowEmpty": true,
+      "defaultValue": ""
+    }
   },
   "runCommand": {
-    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./artifact.ps1', ' -DomainAdminUsername ''', parameters('domainAdminUsername'), ''' -DomainAdminPassword ''', parameters('domainAdminPassword'), ''' -DomainToJoin ', parameters('domainToJoin'), ' -OUPath ''', parameters('ouPath'), '''\"')]"
+    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./artifact.ps1', ' -DomainAdminUsername ''', parameters('domainAdminUsername'), ''' -DomainAdminPassword ''', parameters('domainAdminPassword'), ''' -DomainToJoin ', parameters('domainToJoin'), ' -OUPath ''', parameters('ouPath'), ' -ADGroup ''', parameters('adGroup'),  '''\"')]"
   },
   "postDeployActions": [
     {

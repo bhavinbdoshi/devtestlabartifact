@@ -11,7 +11,10 @@ param
     [string] $DomainToJoin,
 
     [Parameter(Mandatory = $false)]
-    [string] $OUPath
+    [string] $OUPath,
+
+    [Parameter(Mandatory = $false)]
+    [string] $ADGroup
 )
 
 ###################################################################################################
@@ -62,7 +65,8 @@ function Join-Domain
         [string] $DomainName,
         [string] $UserName,
         [securestring] $Password,
-        [string] $OUPath
+        [string] $OUPath,
+        [string] $ADGroup
     )
 
     if ((Get-WmiObject Win32_ComputerSystem).Domain -eq $DomainName)
@@ -71,23 +75,29 @@ function Join-Domain
     }
     else
     {
-        $credential = New-Object System.Management.Automation.PSCredential($UserName, $Password)
+
+    # Main execution block.
+    #
+    #    $credential = New-Object System.Management.Automation.PSCredential($UserName, $Password)
+    #    
+    #    if ($OUPath)
+    #    {
+    #        [Microsoft.PowerShell.Commands.ComputerChangeInfo]$computerChangeInfo = Add-Computer -DomainName $DomainName -Credential $credential -OUPath $OUPath -Force -PassThru
+    #    }
+    #    else
+    #    {
+    #        [Microsoft.PowerShell.Commands.ComputerChangeInfo]$computerChangeInfo = Add-Computer -DomainName $DomainName -Credential $credential -Force -PassThru
+    #    }
+    #    
+    #    if (-not $computerChangeInfo.HasSucceeded)
+    #    {
+    #        throw "Failed to join computer $($Env:COMPUTERNAME) to domain $DomainName."
+    #    }
         
-        if ($OUPath)
-        {
-            [Microsoft.PowerShell.Commands.ComputerChangeInfo]$computerChangeInfo = Add-Computer -DomainName $DomainName -Credential $credential -OUPath $OUPath -Force -PassThru
-        }
-        else
-        {
-            [Microsoft.PowerShell.Commands.ComputerChangeInfo]$computerChangeInfo = Add-Computer -DomainName $DomainName -Credential $credential -Force -PassThru
-        }
-        
-        if (-not $computerChangeInfo.HasSucceeded)
-        {
-            throw "Failed to join computer $($Env:COMPUTERNAME) to domain $DomainName."
-        }
-        
-        Write-Host "Computer $($Env:COMPUTERNAME) successfully joined domain $DomainName."
+
+        $x = Get-WindowsCapability -Name RSAT* -Online
+
+        Write-Host $x
     }
 }
 
