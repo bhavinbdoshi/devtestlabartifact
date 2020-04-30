@@ -1,8 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
-  "title": "Join Active Directory (AD) domain",
+  "title": "Custom Join Active Directory (AD) domain",
   "description": "Joins the virtual machine to the given Active Directory domain and reboots the machine.",
-  "publisher": "Microsoft",
+  "publisher": "Bhavin",
   "tags": [
     "Windows"
   ],
@@ -40,7 +40,7 @@
     }
   },
   "runCommand": {
-    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./artifact.ps1', ' -DomainAdminUsername ''', parameters('domainAdminUsername'), ''' -DomainAdminPassword ''', parameters('domainAdminPassword'), ''' -DomainToJoin ', parameters('domainToJoin'), ' -OUPath ''', parameters('ouPath'), ' -ADGroup ''', parameters('adGroup'),  '''\"')]"
+    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./artifact.ps1', ' -DomainAdminUsername ''', parameters('domainAdminUsername'), ''' -DomainAdminPassword ''', parameters('domainAdminPassword'), ''' -DomainToJoin ', parameters('domainToJoin'), ' -OUPath ''', parameters('ouPath'), ' -	 ''', parameters('adGroup'),  '''\"')]"
   },
   "postDeployActions": [
     {
