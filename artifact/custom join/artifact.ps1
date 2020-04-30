@@ -116,7 +116,7 @@ try
 
     Write-Host "Attempting to join computer $($Env:COMPUTERNAME) to domain $DomainToJoin."
     $securePass = ConvertTo-SecureString $DomainAdminPassword -AsPlainText -Force
-    Join-Domain -DomainName $DomainToJoin -User $DomainAdminUsername -Password $securePass -OUPath $OUPath
+    Join-Domain -DomainName $DomainToJoin -User $DomainAdminUsername -Password $securePass -OUPath $OUPath -ADGroup $ADGroup
 
     Write-Host 'Artifact applied successfully.'
 }
