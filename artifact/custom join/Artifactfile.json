@@ -40,6 +40,6 @@
     }
   },
   "runCommand": {
-    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./artifact.ps1', ' -DomainAdminUsername ''', parameters('domainAdminUsername'), ''' -DomainAdminPassword ''', parameters('domainAdminPassword'), ''' -DomainToJoin ', parameters('domainToJoin'), ' -OUPath ''', parameters('ouPath'), ' -ADGroup	''', parameters('adGroup'),  '''\"')]"
+    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./artifact.ps1', ' -DomainAdminUsername ''', parameters('domainAdminUsername'), ''' -DomainAdminPassword ''', parameters('domainAdminPassword'), ''' -DomainToJoin ', parameters('domainToJoin'), ' -OUPath ''', parameters('ouPath'), ''' -ADGroup ''' , parameters('adGroup')  , '''\"')]"
   }
 }
