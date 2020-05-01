@@ -102,7 +102,7 @@ function Join-Domain
         Write-Host $x[0].State
 
         Write-Host "Running Get-Command Module ActiveDirectory"
-        Get-Command Module ActiveDirectory
+        Get-Command -Module ActiveDirectory
         Write-Host "Completed running Get-Command Module ActiveDirectory"
 
     #    $cnt = Get-Command Module ActiveDirectory | measure-object | select count
@@ -110,7 +110,7 @@ function Join-Domain
     #    Write-Host $cnt
 
 
-        Add-WindowsCapability -online -Name -Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0
+        Add-WindowsCapability -online -Name "Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0"
 
         $x2 = Get-WindowsCapability -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -Online
         
