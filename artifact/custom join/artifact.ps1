@@ -101,16 +101,16 @@ function Join-Domain
         Write-Host $x[0].Name
         Write-Host $x[0].State
 
-        Write-Host "Running Get-Command –Module ActiveDirectory"
-        Get-Command –Module ActiveDirectory
-        Write-Host "Completed running Get-Command –Module ActiveDirectory"
+        Write-Host "Running Get-Command Module ActiveDirectory"
+        Get-Command Module ActiveDirectory
+        Write-Host "Completed running Get-Command Module ActiveDirectory"
 
-    #    $cnt = Get-Command –Module ActiveDirectory | measure-object | select count
+    #    $cnt = Get-Command Module ActiveDirectory | measure-object | select count
     #    Write-Host "Count of ActiveDirectory Module Before Installation"
     #    Write-Host $cnt
 
 
-        Add-WindowsCapability –online –Name “Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0”
+        Add-WindowsCapability -online -Name -Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0
 
         $x2 = Get-WindowsCapability -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -Online
         
@@ -118,9 +118,9 @@ function Join-Domain
         Write-Host $x2[0].Name
         Write-Host $x2[0].State
 
-        Write-Host "Running Get-Command –Module ActiveDirectory"
-        Get-Command –Module ActiveDirectory
-        Write-Host "Completed running Get-Command –Module ActiveDirectory"
+        Write-Host "Running Get-Command Module ActiveDirectory"
+        Get-Command -Module ActiveDirectory
+        Write-Host "Completed running Get-Command Module ActiveDirectory"
 
          Write-Host "Running  Get-Command -Name Add-ADGroupMember"
         Get-Command -Name Add-ADGroupMember -ErrorAction SilentlyContinue
