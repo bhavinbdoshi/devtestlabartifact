@@ -101,30 +101,32 @@ function Join-Domain
         Write-Host $x[0].Name
         Write-Host $x[0].State
 
-        Write-Host "Running Get-Command Module ActiveDirectory"
-        Get-Command -Module ActiveDirectory
-        Write-Host "Completed running Get-Command Module ActiveDirectory"
+    #    Write-Host "Running Get-Command Module ActiveDirectory"
+    #    Get-Command -Module ActiveDirectory
+    #    Write-Host "Completed running Get-Command Module ActiveDirectory"
 
-    #    $cnt = Get-Command Module ActiveDirectory | measure-object | select count
-    #    Write-Host "Count of ActiveDirectory Module Before Installation"
-    #    Write-Host $cnt
+        $cnt = Get-Command -Module ActiveDirectory | Measure-object | Select-Object count
+        Write-Host "Count of ActiveDirectory Module Before Installation"
+        Write-Host $cnt
 
 
         Add-WindowsCapability -online -Name "Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0"
+        #Remove-WindowsCapability -online -Name "Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0"
 
         $x2 = Get-WindowsCapability -Name 'Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0' -Online
+
         
-        Write-Host "Status of Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0 Package on VM and status"
+        Write-Host "Status of Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0 Package on VM and status after installation"
         Write-Host $x2[0].Name
         Write-Host $x2[0].State
 
-        Write-Host "Running Get-Command Module ActiveDirectory"
-        Get-Command -Module ActiveDirectory
-        Write-Host "Completed running Get-Command Module ActiveDirectory"
+        $cnt2 = Get-Command -Module ActiveDirectory | Measure-object | Select-Object count
+        Write-Host "Count of ActiveDirectory Module After Installation"
+        Write-Host $cnt2
 
-         Write-Host "Running  Get-Command -Name Add-ADGroupMember"
+        Write-Host "Running  Get-Command -Name Add-ADGroupMember"
         Get-Command -Name Add-ADGroupMember -ErrorAction SilentlyContinue
-         Write-Host "Completed  Get-Command -Name Add-ADGroupMember"
+        Write-Host "Completed  Get-Command -Name Add-ADGroupMember"
     }
 }
 
